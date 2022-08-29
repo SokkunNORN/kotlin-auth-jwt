@@ -1,0 +1,4 @@
+CREATE USER smallAuthUser IDENTIFIED BY smallAuthPassword;
+GRANT CONNECT, RESOURCE TO smallAuthUser;
+ALTER USER smallAuthUser QUOTA UNLIMITED ON USERS;
+exit;
