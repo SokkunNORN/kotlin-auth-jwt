@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- SEQUENCE -->
+    <changeSet id="init-sequence-auth" author="sokkun">
+        <createSequence sequenceName="SEQ_USER" startValue="10" incrementBy="10"/>
+        <createSequence sequenceName="SEQ_ACCESS_TOKEN_STATUS" startValue="10" incrementBy="10"/>
+        <createSequence sequenceName="SEQ_ACCESS_TOKEN" startValue="10" incrementBy="10"/>
+    </changeSet>
+
+    <!-- TABLES -->
+    <changeSet id="auth-create-table" author="sokkun">
+        <!-- USER -->
+        <createTable tableName="user">
+            <column name="id" type="NUMBER(19)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="name" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR2(255)"/>
+            <column name="phone_number" type="VARCHAR2(255)"/>
+            <column name="gender" type="VARCHAR2(255)"/>
+            <column name="address" type="VARCHAR2(255)"/>
+            <column name="username" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="attempt" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="freeze_date_time" type="TIMESTAMP(6)"/>
+            <column name="password_expiration_date" type="TIMESTAMP(6)"/>
+            <column name="password_expiration_key" type="VARCHAR2(255)"/>
+            <column name="expiration_key_life" type="TIMESTAMP(6)"/>
+            <column name="registration_key" type="VARCHAR2(255)"/>
+            <column name="registration_date_time" type="TIMESTAMP(6)"/>
+            <column name="is_first_login" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_id" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+
+        <!-- ACCESS TOKEN -->
+        <createTable tableName="access_token">
+            <column name="id" type="NUMBER(19)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_access_token"/>
+            </column>
+            <column name="hash_token" type="VARCHAR2(255)"/>
+            <column name="device_id" type="VARCHAR2(255)"/>
+            <column name="user_agent" type="VARCHAR2(255)"/>
+            <column name="client_ip" type="VARCHAR2(255)"/>
+            <column name="user_id" type="NUMBER(19)"/>
+            <column name="last_datetime_request" type="TIMESTAMP(6)"/>
+            <column name="expired_datetime" type="TIMESTAMP(6)"/>
+            <column name="refresh_token" type="VARCHAR2(255)"/>
+            <column name="refresh_token_used_times" type="NUMBER(19)"/>
+            <column name="refresh_token_expired_datetime" type="TIMESTAMP(6)"/>
+            <column name="status_id" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+
+        <!-- OLD PASSWORD -->
+        <createTable tableName="old_password">
+            <column name="id" type="NUMBER(19)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_old_password"/>
+            </column>
+            <column name="password" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+
+        <!-- PASSWORD POLICY -->
+        <createTable tableName="password_policy">
+            <column name="id" type="NUMBER(19)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_password_policy"/>
+            </column>
+            <column name="min_length" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_num_lower_letter" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_num_numeric" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_num_special_char" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_num_upper_letter" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notify_before" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_in" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_id" type="NUMBER(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+
+        <!-- ACCESS TOKEN STATUS -->
+        <createTable tableName="access_token_status">
+            <column name="id" type="NUMBER(19)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_access_token_status"/>
+            </column>
+            <column name="name" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- FOREIGN KEY -->
+    <changeSet id="auth-foreign-key" author="sokkun">
+        <!-- ACCESS TOKEN -->
+        <addForeignKeyConstraint baseTableName="access_token" baseColumnNames="user_id"
+                                 constraintName="fk_access_token_user_id"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="access_token" baseColumnNames="status_id"
+                                 constraintName="fk_access_token_status_id"
+                                 referencedTableName="access_token_status"
+                                 referencedColumnNames="id"/>
+
+        <!-- USER -->
+        <addForeignKeyConstraint baseTableName="user" baseColumnNames="status_id" constraintName="fk_user_status_id"
+                                 referencedTableName="user_status"
+                                 referencedColumnNames="id"/>
+
+        <!-- PASSWORD POLICY -->
+        <addForeignKeyConstraint baseTableName="password_policy" baseColumnNames="status_id"
+                                 constraintName="fk_password_policy_status_id"
+                                 referencedTableName="access_token_status"
+                                 referencedColumnNames="id"/>
+
+        <!-- OLD PASSWORD -->
+        <addForeignKeyConstraint baseTableName="old_password" baseColumnNames="user_id"
+                                 constraintName="fk_old_password_user_id"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

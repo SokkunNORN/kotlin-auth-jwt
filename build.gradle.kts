@@ -18,12 +18,18 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.liquibase:liquibase-core")
-	runtimeOnly("com.h2database:h2")
 	implementation("com.oracle.ojdbc:ojdbc8:19.3.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	//	jwt
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 }
 
 tasks.withType<KotlinCompile> {

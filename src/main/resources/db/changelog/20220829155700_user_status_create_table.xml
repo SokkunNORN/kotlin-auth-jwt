@@ -11,10 +11,10 @@
 
     <!-- TABLES -->
     <changeSet id="user-status-create-table" author="sokkun">
-        <!-- PARTICIPANT STATUS -->
+        <!-- USER STATUS -->
         <createTable tableName="user_status">
             <column name="id" type="NUMBER(19)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_participant_status"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_status"/>
             </column>
             <column name="name" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
