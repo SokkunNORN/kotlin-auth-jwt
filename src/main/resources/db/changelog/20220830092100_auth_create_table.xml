@@ -7,8 +7,10 @@
     <!-- SEQUENCE -->
     <changeSet id="init-sequence-auth" author="sokkun">
         <createSequence sequenceName="SEQ_USER" startValue="10" incrementBy="10"/>
-        <createSequence sequenceName="SEQ_ACCESS_TOKEN_STATUS" startValue="10" incrementBy="10"/>
+        <createSequence sequenceName="SEQ_STATUS" startValue="10" incrementBy="10"/>
         <createSequence sequenceName="SEQ_ACCESS_TOKEN" startValue="10" incrementBy="10"/>
+        <createSequence sequenceName="SEQ_OLD_PASSWORD" startValue="10" incrementBy="10"/>
+        <createSequence sequenceName="SEQ_PASSWORD_POLICY" startValue="10" incrementBy="10"/>
     </changeSet>
 
     <!-- TABLES -->
@@ -26,7 +28,7 @@
             <column name="gender" type="VARCHAR2(255)"/>
             <column name="address" type="VARCHAR2(255)"/>
             <column name="username" type="VARCHAR2(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
@@ -120,8 +122,8 @@
             <column name="updated_at" type="TIMESTAMP(6)"/>
         </createTable>
 
-        <!-- ACCESS TOKEN STATUS -->
-        <createTable tableName="access_token_status">
+        <!-- STATUS -->
+        <createTable tableName="status">
             <column name="id" type="NUMBER(19)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_access_token_status"/>
             </column>
@@ -142,18 +144,18 @@
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="access_token" baseColumnNames="status_id"
                                  constraintName="fk_access_token_status_id"
-                                 referencedTableName="access_token_status"
+                                 referencedTableName="status"
                                  referencedColumnNames="id"/>
 
         <!-- USER -->
         <addForeignKeyConstraint baseTableName="user" baseColumnNames="status_id" constraintName="fk_user_status_id"
-                                 referencedTableName="user_status"
+                                 referencedTableName="status"
                                  referencedColumnNames="id"/>
 
         <!-- PASSWORD POLICY -->
         <addForeignKeyConstraint baseTableName="password_policy" baseColumnNames="status_id"
                                  constraintName="fk_password_policy_status_id"
-                                 referencedTableName="access_token_status"
+                                 referencedTableName="status"
                                  referencedColumnNames="id"/>
 
         <!-- OLD PASSWORD -->
