@@ -1,10 +1,6 @@
-package me.auth.com.authentication.demain.model
+package me.auth.com.authentication.domain.model
 
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import me.auth.com.authentication.demain.base.AuthorTimeStamp
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
-import java.time.LocalDateTime
+import me.auth.com.authentication.domain.base.AuthorTimeStamp
 import javax.persistence.*
 
 @Entity

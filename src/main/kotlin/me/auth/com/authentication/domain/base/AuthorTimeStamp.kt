@@ -1,4 +1,4 @@
-package me.auth.com.authentication.demain.base
+package me.auth.com.authentication.domain.base
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
