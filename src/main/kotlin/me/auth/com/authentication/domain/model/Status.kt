@@ -13,4 +13,4 @@ data class Status(
 
     @Column(name = "name", nullable = false)
     val name: String
-) : AuthorTimeStamp()
+)

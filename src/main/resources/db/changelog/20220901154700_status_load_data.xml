@@ -12,8 +12,6 @@
                   primaryKey="id">
             <column name="id" type="NUMERIC"/>
             <column name="name" type="STRING"/>
-            <column name="created_at" type="TIMESTAMP(6)"/>
-            <column name="updated_at" type="TIMESTAMP(6)"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

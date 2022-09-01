@@ -136,8 +136,6 @@
             <column name="name" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="TIMESTAMP(6)"/>
-            <column name="updated_at" type="TIMESTAMP(6)"/>
         </createTable>
     </changeSet>
 

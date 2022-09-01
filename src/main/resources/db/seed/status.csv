@@ -1,3 +1,3 @@
-id,name,created_at,updated_at
-1,Active,null,null
-2,Inactive,null,null
+id,name
+1,Active
+2,Inactive
