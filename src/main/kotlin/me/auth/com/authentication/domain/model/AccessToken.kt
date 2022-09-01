@@ -41,5 +41,5 @@ data class AccessToken(
 ) : AuthorTimeStamp() {
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: User? = null
+    val user: Auth? = null
 }

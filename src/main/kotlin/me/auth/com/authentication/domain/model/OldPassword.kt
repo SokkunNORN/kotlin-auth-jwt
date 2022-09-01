@@ -16,5 +16,5 @@ data class OldPassword(
 ) : AuthorTimeStamp() {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    lateinit var user: User
+    lateinit var user: Auth
 }

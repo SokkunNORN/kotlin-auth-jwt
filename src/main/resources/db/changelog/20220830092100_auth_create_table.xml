@@ -16,38 +16,44 @@
     <!-- TABLES -->
     <changeSet id="auth-create-table" author="sokkun">
         <!-- USER -->
-        <createTable tableName="user">
-            <column name="id" type="NUMBER(19)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+        <createTable tableName="auths">
+            <column name="id" type="NUMBER(19, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_authes"/>
             </column>
             <column name="name" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="VARCHAR2(255)"/>
+            <column name="username" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="idx_authes_username"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR2(255 CHAR)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="VARCHAR2(255 CHAR)" />
             <column name="phone_number" type="VARCHAR2(255)"/>
             <column name="gender" type="VARCHAR2(255)"/>
             <column name="address" type="VARCHAR2(255)"/>
-            <column name="username" type="VARCHAR2(255)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="password" type="VARCHAR2(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="attempt" type="NUMBER(19)">
-                <constraints nullable="false"/>
-            </column>
+
+            <column name="attempt" type="NUMBER(5, 0)" defaultValue="0" />
             <column name="freeze_date_time" type="TIMESTAMP(6)"/>
-            <column name="password_expiration_date" type="TIMESTAMP(6)"/>
-            <column name="password_expiration_key" type="VARCHAR2(255)"/>
             <column name="expiration_key_life" type="TIMESTAMP(6)"/>
-            <column name="registration_key" type="VARCHAR2(255)"/>
-            <column name="registration_date_time" type="TIMESTAMP(6)"/>
-            <column name="is_first_login" type="BOOLEAN">
-                <constraints nullable="false"/>
+
+            <column name="is_first_login" type="NUMBER(1, 0)" defaultValue="0">
+                <constraints nullable="true"/>
             </column>
+
+            <column name="password_expiration_date" type="TIMESTAMP(6)"/>
+
+            <column name="password_expiration_key" type="VARCHAR2(255 CHAR)" />
+
             <column name="status_id" type="NUMBER(19)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="registration_key" type="VARCHAR2(255)"/>
+            <column name="registration_date_time" type="TIMESTAMP(6)"/>
+
             <column name="created_at" type="TIMESTAMP(6)"/>
             <column name="updated_at" type="TIMESTAMP(6)"/>
         </createTable>
@@ -139,8 +145,8 @@
     <changeSet id="auth-foreign-key" author="sokkun">
         <!-- ACCESS TOKEN -->
         <addForeignKeyConstraint baseTableName="access_token" baseColumnNames="user_id"
-                                 constraintName="fk_access_token_user_id"
-                                 referencedTableName="user"
+                                 constraintName="fk_access_token_auth_id"
+                                 referencedTableName="auths"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="access_token" baseColumnNames="status_id"
                                  constraintName="fk_access_token_status_id"
@@ -148,7 +154,7 @@
                                  referencedColumnNames="id"/>
 
         <!-- USER -->
-        <addForeignKeyConstraint baseTableName="user" baseColumnNames="status_id" constraintName="fk_user_status_id"
+        <addForeignKeyConstraint baseTableName="auths" baseColumnNames="status_id" constraintName="fk_auth_status_id"
                                  referencedTableName="status"
                                  referencedColumnNames="id"/>
 
@@ -160,8 +166,8 @@
 
         <!-- OLD PASSWORD -->
         <addForeignKeyConstraint baseTableName="old_password" baseColumnNames="user_id"
-                                 constraintName="fk_old_password_user_id"
-                                 referencedTableName="user"
+                                 constraintName="fk_old_password_auth_id"
+                                 referencedTableName="auths"
                                  referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

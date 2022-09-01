@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="status-load-data" author="sokkun">
+        <loadData encoding="UTF-8"
+                  file="db/seed/status.csv"
+                  separator=","
+                  tableName="status"
+                  primaryKey="id">
+            <column name="id" type="NUMERIC"/>
+            <column name="name" type="STRING"/>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
