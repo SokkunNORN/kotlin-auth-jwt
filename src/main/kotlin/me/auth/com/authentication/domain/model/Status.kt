@@ -12,8 +12,5 @@ data class Status(
     val id: Long = 0L,
 
     @Column(name = "name", nullable = false)
-    val name: String,
-
-    @Column(name = "description")
-    val description: String? = null
+    val name: String
 ) : AuthorTimeStamp()
