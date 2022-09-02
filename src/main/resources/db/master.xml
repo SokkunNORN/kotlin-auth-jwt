@@ -6,5 +6,8 @@
 
     <include file="db/changelog/20220830092100_auth_create_table.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/20220901154700_status_load_data.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20220902104400_role_create_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20220902104500_role_load_data.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20220902105600_user_alter_role_id.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

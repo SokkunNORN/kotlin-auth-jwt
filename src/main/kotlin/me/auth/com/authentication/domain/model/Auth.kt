@@ -60,6 +60,10 @@ data class Auth(
     val registrationDateTime: LocalDateTime? = null,
 ) : AuthorTimeStamp() {
     @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    lateinit var role: Role
+
+    @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
     lateinit var status: Status
 
@@ -72,6 +76,7 @@ data class Auth(
             email = this.email,
             phoneNumber = this.phoneNumber,
             address = this.address,
+            role = this.role,
             status = this.status,
             createdAt = this.createdAt.khFormat(),
             updatedAt = this.updatedAt.khFormat()

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- SEQUENCE -->
+    <changeSet id="init-sequence-roles" author="sokkun">
+        <createSequence sequenceName="SEQ_ROLE" startValue="10" incrementBy="10"/>
+    </changeSet>
+
+    <!-- TABLES -->
+    <changeSet id="roles-create-table" author="sokkun">
+        <!-- ROLE -->
+        <createTable tableName="roles">
+            <column name="id" type="NUMBER(19, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_roles"/>
+            </column>
+            <column name="name" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_type" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

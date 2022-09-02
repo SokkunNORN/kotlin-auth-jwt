@@ -1,5 +1,6 @@
 package me.auth.com.authentication.api.response
 
+import me.auth.com.authentication.domain.model.Role
 import me.auth.com.authentication.domain.model.Status
 
 data class UserRes(
@@ -10,6 +11,7 @@ data class UserRes(
     val email: String?,
     val phoneNumber: String?,
     val address: String?,
+    val role: Role,
     val status: Status,
     val createdAt: String?,
     val updatedAt: String?

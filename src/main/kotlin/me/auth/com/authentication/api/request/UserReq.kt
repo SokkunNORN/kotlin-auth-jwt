@@ -15,6 +15,7 @@ data class UserReq(
     val gender: String?,
     val phoneNumber: String?,
     val address: String?,
+    val roleId: Long? = null,
     val statusId: Long? = null,
 ) {
     init {
@@ -22,6 +23,7 @@ data class UserReq(
         getOrElseThrow("username", username)
         getOrElseThrow("password", password)
         getOrElseThrow("statusId", statusId)
+        getOrElseThrow("roleId", roleId)
 
         gender.validGender()
         email.validEmail()

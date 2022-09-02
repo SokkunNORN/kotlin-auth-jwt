@@ -9,3 +9,8 @@ enum class StatusEnum(id: Long, name: String) {
     ACTIVE(1, "Active"),
     INACTIVE(1, "Inactive")
 }
+
+enum class RoleTypeEnum {
+    NBC,
+    FI
+}

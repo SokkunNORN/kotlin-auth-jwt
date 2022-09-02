@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- ALTER USER ROLE ID -->
+    <changeSet id="user-alter-role_id" author="sokkun">
+        <addColumn tableName="auths">
+            <column name="role_id" type="NUMBER(19)"/>
+        </addColumn>
+    </changeSet>
+
+    <!-- FOREIGN KEY -->
+    <changeSet id="add-foreign-key-user-role" author="sokkun">
+        <addForeignKeyConstraint baseTableName="auths" baseColumnNames="role_id" constraintName="fk_auths_role_id"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

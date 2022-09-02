@@ -32,9 +32,7 @@ fun String?.validPhone() : String? {
     return this?.let {
         val pattern = Pattern.matches("(855)[0-9]{8,9}", it)
 
-        if (pattern) {
-            return it
-        }
+        if (pattern) return it
         throw ClientErrorException(ErrorCode.INVALID_INPUT_FORMAT, "phoneNumber")
     }
 }
