@@ -57,5 +57,10 @@ enum class ErrorCode(val code: Int, val message: String) {
     PARAM_NOT_FOUND(53, "%s is not found."),
     INACTIVE_STATUS_FIELD(54, "%s is not active."),
     INVALID_STATUS(55, "%s has invalid status."),
-    NO_TRANSACTION_TO_SETTLE(56, "There are no any transactions for settle.");
+    NO_TRANSACTION_TO_SETTLE(56, "There are no any transactions for settle."),
+    INCORRECT_LOGIN(57, "Incorrect Username and Password."),
+    USER_FROZER(58, "User has been frozen until %s."),
+    USER_NOT_ACTIVE(59, "User is inactive."),
+    IP_NOT_FOUND(60, "IP is not found"),
+    MAX_USED_REFRESH_TOKEN(61, "Reached maximum used of refresh token, please login again."),
 }

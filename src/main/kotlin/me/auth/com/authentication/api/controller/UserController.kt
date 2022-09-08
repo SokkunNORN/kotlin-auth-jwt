@@ -1,4 +1,4 @@
-package me.auth.com.authentication.api.controller.auth
+package me.auth.com.authentication.api.controller
 
 import me.auth.com.authentication.api.request.UserReq
 import me.auth.com.authentication.api.response.UserRes

@@ -13,33 +13,38 @@ data class AccessToken(
     val id: Long = 0L,
 
     @Column(name = "hash_token")
-    val hashToken: String? = null,
+    var hashToken: String? = null,
 
     @Column(name = "device_id")
     val deviceId: String? = null,
 
     @Column(name = "user_agent")
-    val userAgent: String? = null,
+    var userAgent: String? = null,
 
     @Column(name = "client_ip")
-    val clientIp: String? = null,
+    var clientIp: String? = null,
 
     @Column(name = "last_datetime_request")
-    val lastDateTimeRequest: LocalDateTime? = null,
+    var lastDateTimeRequest: LocalDateTime? = null,
 
     @Column(name = "expired_datetime")
-    val expiredDateTime: LocalDateTime? = null,
+    var expiredDateTime: LocalDateTime? = null,
 
     @Column(name = "refresh_token")
-    val refreshToken: String? = null,
+    var refreshToken: String? = null,
 
     @Column(name = "refresh_token_used_times")
-    val refreshTokenUsedTimes: String? = null,
+    var refreshTokenUsedTimes: Int? = null,
 
     @Column(name = "refresh_token_expired_datetime")
-    val refreshTokenExpiredDateTime: LocalDateTime? = null
-) : AuthorTimeStamp() {
+    var refreshTokenExpiredDateTime: LocalDateTime? = null,
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    val user: Auth? = null
+    @JoinColumn(name = "user_id", nullable = false)
+    var user: Auth,
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    var status: Status
+) : AuthorTimeStamp() {
 }

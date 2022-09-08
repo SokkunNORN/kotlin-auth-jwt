@@ -1,11 +1,9 @@
 package me.auth.com.authentication.api.request
 
-import me.auth.com.authentication.command.getOrElseThrow
+import me.auth.com.authentication.command.helper.getOrElseThrow
 import me.auth.com.authentication.command.helper.validEmail
 import me.auth.com.authentication.command.helper.validGender
-import me.auth.com.authentication.command.helper.validPhone
 import me.auth.com.authentication.domain.model.Auth
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 data class UserReq(
     val name: String? = null,
@@ -27,14 +25,14 @@ data class UserReq(
 
         gender.validGender()
         email.validEmail()
-//        phoneNumber.validPhone()
+        phoneNumber.validPhone()
     }
 
     fun toModel(): Auth {
         return Auth(
             name = this.name!!,
             username = this.username!!,
-            password = this.password!!,
+            password = BCryptPasswordEncoder().encode(this.password!!),
             email = this.email,
             phoneNumber = this.phoneNumber,
             gender = this.gender,

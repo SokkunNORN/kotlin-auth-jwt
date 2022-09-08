@@ -1,5 +1,6 @@
-package me.auth.com.authentication.command
+package me.auth.com.authentication.command.helper
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import me.auth.com.authentication.api.exception.ClientErrorException
 import me.auth.com.authentication.api.exception.handler.*
 import me.auth.com.authentication.api.response.helper.PageResponse
@@ -8,6 +9,10 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.mapping.PropertyPath
 import org.springframework.data.mapping.PropertyReferenceException
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 infix fun Boolean.then(action: () -> Unit): Boolean {
@@ -57,4 +62,21 @@ fun <T> Page<T>.toPageResponse(): PageResponse<T> {
             totalPages = this.totalPages
         )
     )
+}
+
+fun <T> T.toMap(): Map<*, *> {
+    return ObjectMapper().convertValue(this, Map::class.java)
+}
+
+fun err(error: ErrorCode, mes: String? = null) {
+    throw ClientErrorException(error, mes)
+}
+
+fun Date.toLocalDateTime(): LocalDateTime {
+    return this.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+}
+
+fun String.toSHA256Base64(): String {
+    val byteHash = MessageDigest.getInstance("SHA-256").digest(this.toByteArray(StandardCharsets.UTF_8))
+    return Base64.getEncoder().encodeToString(byteHash)
 }

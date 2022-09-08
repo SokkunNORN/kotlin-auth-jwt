@@ -24,12 +24,21 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.liquibase:liquibase-core")
 	implementation("com.oracle.ojdbc:ojdbc8:19.3.0.0")
+
+	//	security
+	implementation("org.zalando:problem-spring-web:0.27.0")
+	implementation("org.springframework.security:spring-security-config")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	//	jwt
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+	// user-agent parser
+	implementation("com.github.ua-parser:uap-java:1.5.1")
 }
 
 tasks.withType<KotlinCompile> {

@@ -5,7 +5,7 @@ enum class GenderEnum(gender: String) {
     FEMALE("Female")
 }
 
-enum class StatusEnum(id: Long, name: String) {
+enum class StatusEnum(val id: Long, val code: String) {
     ACTIVE(1, "Active"),
     INACTIVE(1, "Inactive")
 }

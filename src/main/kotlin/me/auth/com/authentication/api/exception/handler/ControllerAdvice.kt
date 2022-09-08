@@ -1,5 +1,6 @@
 package me.auth.com.authentication.api.exception.handler
 
+import me.auth.com.authentication.api.exception.BadRequestException
 import me.auth.com.authentication.api.exception.ClientErrorException
 import me.auth.com.authentication.api.response.helper.ResponseWrapper
 import org.slf4j.Logger
