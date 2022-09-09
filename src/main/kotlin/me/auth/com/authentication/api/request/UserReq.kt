@@ -3,7 +3,9 @@ package me.auth.com.authentication.api.request
 import me.auth.com.authentication.command.helper.getOrElseThrow
 import me.auth.com.authentication.command.helper.validEmail
 import me.auth.com.authentication.command.helper.validGender
+import me.auth.com.authentication.command.helper.validPhone
 import me.auth.com.authentication.domain.model.Auth
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 data class UserReq(
     val name: String? = null,
