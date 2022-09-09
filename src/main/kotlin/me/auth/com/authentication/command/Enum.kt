@@ -7,7 +7,7 @@ enum class GenderEnum(gender: String) {
 
 enum class StatusEnum(val id: Long, val code: String) {
     ACTIVE(1, "Active"),
-    INACTIVE(1, "Inactive")
+    INACTIVE(2, "Inactive")
 }
 
 enum class RoleTypeEnum {
